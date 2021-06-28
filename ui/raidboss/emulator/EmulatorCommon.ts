@@ -28,12 +28,14 @@ export default class EmulatorCommon {
       if (exclude.includes(i))
         continue;
 
-      if (typeof data[i] === 'object')
+      if (typeof data[i] === 'object') {
         ret[i] = EmulatorCommon._cloneData(data[i]);
-      else
-        // Assignment of any to any. See DataType definition above for reasoning.
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        ret[i] = data[i];
+        continue;
+      }
+
+      // Assignment of any to any. See DataType definition above for reasoning.
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      ret[i] = data[i];
     }
     return ret;
   }
