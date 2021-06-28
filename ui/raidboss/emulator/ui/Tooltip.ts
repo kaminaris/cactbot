@@ -18,7 +18,7 @@ const showEvents = [
   'focus',
 ] as const;
 
-type TemplatesType = {[Property in ValidDirection]: HTMLTemplateElement};
+type TemplatesType = { [Property in ValidDirection]: HTMLTemplateElement };
 
 const toPx = (px: number): string => `${px}px`;
 
@@ -38,7 +38,8 @@ export default class Tooltip {
     private direction: ValidDirection,
     text: string,
     autoShow = true,
-    autoHide = true) {
+    autoHide = true,
+  ) {
     Tooltip.initializeTemplates();
 
     if (!(target instanceof HTMLElement)) {

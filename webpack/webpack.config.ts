@@ -11,7 +11,6 @@ interface Configuration extends WebpackConfiguration {
   devServer?: WebpackDevServerConfiguration;
 }
 
-
 export default (
   { cactbotModules, cactbotChunks, cactbotHtmlChunksMap }: {
     cactbotModules: { [module: string]: string };
@@ -24,14 +23,16 @@ export default (
     // TDOO: Remove when everything is TypeScript, convert to:
     // entries[module] = `./${module}.ts`;
     let extension = 'js';
-    if ([
-      'oopsyraidsyLive',
-      'oopsyraidsySummary',
-      'radar',
-      'raidboss',
-      'test',
-      'timerbarTest',
-    ].includes(key))
+    if (
+      [
+        'oopsyraidsyLive',
+        'oopsyraidsySummary',
+        'radar',
+        'raidboss',
+        'test',
+        'timerbarTest',
+      ].includes(key)
+    )
       extension = 'ts';
     entries[module] = `./${module}.${extension}`;
   });

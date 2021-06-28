@@ -96,12 +96,15 @@ const parseHelper = <T extends TriggerTypes>(
       str += Regexes.maybeCapture(
         // more accurate type instead of `as` cast
         // maybe this function needs a refactoring
-        capture, fieldName, (params as { [s: string]: string })[fieldName], fieldValue) +
+        capture,
+        fieldName,
+        (params as { [s: string]: string })[fieldName],
+        fieldValue,
+      ) +
         separator;
     } else {
       str += fieldValue + separator;
     }
-
 
     // Stop if we're not capturing and don't care about future fields.
     if (key >= (maxKey ?? 0 as number))
@@ -139,7 +142,6 @@ export default class NetRegexes {
     });
   }
 
-
   /**
    * matches: https://github.com/quisquous/cactbot/blob/main/docs/LogGuide.md#15-networkability
    * matches: https://github.com/quisquous/cactbot/blob/main/docs/LogGuide.md#16-networkaoeability
@@ -156,7 +158,6 @@ export default class NetRegexes {
       7: { field: 'target' },
     });
   }
-
 
   /**
    * matches: https://github.com/quisquous/cactbot/blob/main/docs/LogGuide.md#15-networkability
@@ -183,7 +184,6 @@ export default class NetRegexes {
     });
   }
 
-
   /**
    * matches: https://github.com/quisquous/cactbot/blob/main/docs/LogGuide.md#1b-networktargeticon-head-markers
    */
@@ -197,7 +197,6 @@ export default class NetRegexes {
     });
   }
 
-
   /**
    * matches: https://github.com/quisquous/cactbot/blob/main/docs/LogGuide.md#03-addcombatant
    */
@@ -209,7 +208,6 @@ export default class NetRegexes {
       3: { field: 'name' },
     });
   }
-
 
   /**
    * matches: https://github.com/quisquous/cactbot/blob/main/docs/LogGuide.md#03-addcombatant
@@ -237,7 +235,6 @@ export default class NetRegexes {
     });
   }
 
-
   /**
    * matches: https://github.com/quisquous/cactbot/blob/main/docs/LogGuide.md#04-removecombatant
    */
@@ -252,7 +249,6 @@ export default class NetRegexes {
       12: { field: 'hp' },
     });
   }
-
 
   /**
    * matches: https://github.com/quisquous/cactbot/blob/main/docs/LogGuide.md#1a-networkbuff
@@ -271,7 +267,6 @@ export default class NetRegexes {
       9: { field: 'count' },
     });
   }
-
 
   /**
    * Prefer gainsEffect over this function unless you really need extra data.
@@ -299,7 +294,6 @@ export default class NetRegexes {
     });
   }
 
-
   /**
    * matches: https://github.com/quisquous/cactbot/blob/main/docs/LogGuide.md#1e-networkbuffremove
    */
@@ -317,7 +311,6 @@ export default class NetRegexes {
     });
   }
 
-
   /**
    * matches: https://github.com/quisquous/cactbot/blob/main/docs/LogGuide.md#23-networktether
    */
@@ -332,7 +325,6 @@ export default class NetRegexes {
       8: { field: 'id' },
     });
   }
-
 
   /**
    * 'target' was defeated by 'source'
@@ -349,18 +341,20 @@ export default class NetRegexes {
     });
   }
 
-
   /**
    * matches: https://github.com/quisquous/cactbot/blob/main/docs/LogGuide.md#00-logline
    */
   static echo(params?: NetParams['GameLog']): CactbotBaseRegExp<'GameLog'> {
     if (typeof params === 'undefined')
       params = {};
-    Regexes.validateParams(params, 'echo', ['type', 'timestamp', 'code', 'name', 'line', 'capture']);
+    Regexes.validateParams(
+      params,
+      'echo',
+      ['type', 'timestamp', 'code', 'name', 'line', 'capture'],
+    );
     params.code = '0038';
     return NetRegexes.gameLog(params);
   }
-
 
   /**
    * matches: https://github.com/quisquous/cactbot/blob/main/docs/LogGuide.md#00-logline
@@ -368,11 +362,14 @@ export default class NetRegexes {
   static dialog(params?: NetParams['GameLog']): CactbotBaseRegExp<'GameLog'> {
     if (typeof params === 'undefined')
       params = {};
-    Regexes.validateParams(params, 'dialog', ['type', 'timestamp', 'code', 'name', 'line', 'capture']);
+    Regexes.validateParams(
+      params,
+      'dialog',
+      ['type', 'timestamp', 'code', 'name', 'line', 'capture'],
+    );
     params.code = '0044';
     return NetRegexes.gameLog(params);
   }
-
 
   /**
    * matches: https://github.com/quisquous/cactbot/blob/main/docs/LogGuide.md#00-logline
@@ -380,11 +377,14 @@ export default class NetRegexes {
   static message(params?: NetParams['GameLog']): CactbotBaseRegExp<'GameLog'> {
     if (typeof params === 'undefined')
       params = {};
-    Regexes.validateParams(params, 'message', ['type', 'timestamp', 'code', 'name', 'line', 'capture']);
+    Regexes.validateParams(
+      params,
+      'message',
+      ['type', 'timestamp', 'code', 'name', 'line', 'capture'],
+    );
     params.code = '0839';
     return NetRegexes.gameLog(params);
   }
-
 
   /**
    * fields: code, name, line, capture
@@ -400,7 +400,6 @@ export default class NetRegexes {
     });
   }
 
-
   /**
    * matches: https://github.com/quisquous/cactbot/blob/main/docs/LogGuide.md#00-logline
    */
@@ -408,7 +407,6 @@ export default class NetRegexes {
     // for compat with Regexes.
     return NetRegexes.gameLog(params);
   }
-
 
   /**
    * matches: https://github.com/quisquous/cactbot/blob/main/docs/LogGuide.md#0c-playerstats
@@ -436,7 +434,6 @@ export default class NetRegexes {
     });
   }
 
-
   /**
    * matches: https://github.com/quisquous/cactbot/blob/main/docs/LogGuide.md#01-changezone
    */
@@ -448,7 +445,6 @@ export default class NetRegexes {
       3: { field: 'name' },
     });
   }
-
 
   /**
    * matches: https://github.com/quisquous/cactbot/blob/main/docs/LogGuide.md#21-network6d-actor-control-lines

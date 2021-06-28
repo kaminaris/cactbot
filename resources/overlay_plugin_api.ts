@@ -37,7 +37,6 @@ declare global {
   }
 }
 
-
 type IAddOverlayListener = <T extends EventType>(event: T, cb: EventMap[T]) => void;
 type IRemoveOverlayListener = <T extends EventType>(event: T, cb: EventMap[T]) => void;
 
@@ -52,8 +51,8 @@ let inited = false;
 let wsUrl: RegExpExecArray | null = null;
 let ws: WebSocket | null = null;
 let queue: (
-  { [s: string]: unknown } |
-  [{ [s: string]: unknown }, ((value: string | null) => unknown) | undefined]
+  | { [s: string]: unknown }
+  | [{ [s: string]: unknown }, ((value: string | null) => unknown) | undefined]
 )[] | null = [];
 let rseqCounter = 0;
 const responsePromises: Record<number, (value: unknown) => void> = {};

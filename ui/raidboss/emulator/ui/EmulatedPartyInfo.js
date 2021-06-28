@@ -50,12 +50,18 @@ export default class EmulatedPartyInfo extends EventBus {
     this.$triggerHideSkippedCheckbox.addEventListener('change', this.updateTriggerState);
     this.$triggerHideCollectCheckbox.addEventListener('change', this.updateTriggerState);
 
-    this.$triggerItemTemplate = document.querySelector('template.triggerItem').content.firstElementChild;
-    this.$playerInfoRowTemplate = document.querySelector('template.playerInfoRow').content.firstElementChild;
-    this.$playerTriggerInfoTemplate = document.querySelector('template.playerTriggerInfo').content.firstElementChild;
-    this.$jsonViewerTemplate = document.querySelector('template.jsonViewer').content.firstElementChild;
-    this.$triggerLabelTemplate = document.querySelector('template.triggerLabel').content.firstElementChild;
-    this.$wrapCollapseTemplate = document.querySelector('template.wrapCollapse').content.firstElementChild;
+    this.$triggerItemTemplate =
+      document.querySelector('template.triggerItem').content.firstElementChild;
+    this.$playerInfoRowTemplate =
+      document.querySelector('template.playerInfoRow').content.firstElementChild;
+    this.$playerTriggerInfoTemplate =
+      document.querySelector('template.playerTriggerInfo').content.firstElementChild;
+    this.$jsonViewerTemplate =
+      document.querySelector('template.jsonViewer').content.firstElementChild;
+    this.$triggerLabelTemplate =
+      document.querySelector('template.triggerLabel').content.firstElementChild;
+    this.$wrapCollapseTemplate =
+      document.querySelector('template.wrapCollapse').content.firstElementChild;
   }
 
   hideNonExecutedTriggers() {
@@ -81,7 +87,6 @@ export default class EmulatedPartyInfo extends EventBus {
       n.classList.remove('d-none');
     });
   }
-
 
   /**
    * @param {RaidEmulator} emulator
@@ -158,7 +163,9 @@ export default class EmulatedPartyInfo extends EventBus {
       return;
 
     this.currentPerspective = id;
-    this.$triggerInfo.querySelectorAll('.playerTriggerInfo').forEach((r) => r.classList.add('d-none'));
+    this.$triggerInfo.querySelectorAll('.playerTriggerInfo').forEach((r) =>
+      r.classList.add('d-none')
+    );
     this.displayedParty[id].$triggerElem.classList.remove('d-none');
     this.$partyInfo.querySelectorAll('.playerInfoRow').forEach((r) => {
       r.classList.remove('border');
@@ -280,7 +287,8 @@ export default class EmulatedPartyInfo extends EventBus {
     $container.append(this._wrapCollapse({
       time: EmulatorCommon.timeToString(
         encounter.encounter.duration - encounter.encounter.initialOffset,
-        false),
+        false,
+      ),
       name: 'Final Data',
       classes: ['data'],
       $obj: $finalDataViewer,
@@ -330,13 +338,15 @@ export default class EmulatedPartyInfo extends EventBus {
   getTriggerFiredLabelTime(Trigger) {
     return EmulatorCommon.timeToString(
       Trigger.logLine.offset - this.emulator.currentEncounter.encounter.initialOffset,
-      false);
+      false,
+    );
   }
 
   getTriggerResolvedLabelTime(Trigger) {
     return EmulatorCommon.timeToString(
       Trigger.resolvedOffset - this.emulator.currentEncounter.encounter.initialOffset,
-      false);
+      false,
+    );
   }
 
   /**
@@ -393,9 +403,22 @@ export default class EmulatedPartyInfo extends EventBus {
 }
 
 EmulatedPartyInfo.jobOrder = [
-  'PLD', 'WAR', 'DRK', 'GNB',
-  'WHM', 'SCH', 'AST',
-  'MNK', 'DRG', 'NIN', 'SAM',
-  'BRD', 'MCH', 'DNC',
-  'BLM', 'SMN', 'RDM',
-  'BLU'];
+  'PLD',
+  'WAR',
+  'DRK',
+  'GNB',
+  'WHM',
+  'SCH',
+  'AST',
+  'MNK',
+  'DRG',
+  'NIN',
+  'SAM',
+  'BRD',
+  'MCH',
+  'DNC',
+  'BLM',
+  'SMN',
+  'RDM',
+  'BLU',
+];
