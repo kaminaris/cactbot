@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       new RaidEmulatorTimelineController(options, timelineUI, raidbossFileData);
   timelineController.bindTo(emulator);
   const popupText = new RaidEmulatorPopupText(
-      options, new TimelineLoader(timelineController), raidbossFileData);
+    options, new TimelineLoader(timelineController), raidbossFileData);
   popupText.bindTo(emulator);
 
   timelineController.SetPopupTextInterface(new PopupTextGenerator(popupText));
@@ -252,18 +252,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       logConverterWorker.onmessage = (msg) => {
         switch (msg.data.type) {
-        case 'progress':
-          {
-            const percent = ((msg.data.bytes / msg.data.totalBytes) * 100).toFixed(2);
-            bar.style.width = percent + '%';
-            label.innerText = `${msg.data.bytes}/${msg.data.totalBytes} bytes, ${msg.data.lines} lines (${percent}%)`;
-          }
-          break;
-        case 'encounter':
-          {
-            const enc = msg.data.encounter;
+          case 'progress':
+            {
+              const percent = ((msg.data.bytes / msg.data.totalBytes) * 100).toFixed(2);
+              bar.style.width = percent + '%';
+              label.innerText = `${msg.data.bytes}/${msg.data.totalBytes} bytes, ${msg.data.lines} lines (${percent}%)`;
+            }
+            break;
+          case 'encounter':
+            {
+              const enc = msg.data.encounter;
 
-            encLabel.innerText = `
+              encLabel.innerText = `
             Zone: ${enc.encounterZoneName}
             Encounter: ${msg.data.name}
             Start: ${new Date(enc.startTimestamp)}
@@ -274,28 +274,28 @@ document.addEventListener('DOMContentLoaded', async () => {
             End Status: ${enc.endStatus}
             Line Count: ${enc.logLines.length}
             `;
-            // Objects sent via message are raw objects, not typed.
-            // Need to get the name another way and override for Persistor.
-            enc.combatantTracker.getMainCombatantName = () => msg.data.name;
-            promises.push(persistor.persistEncounter(enc));
-          }
-          break;
-        case 'done':
-          Promise.all(promises).then(() => {
-            encounterTab.refresh();
-            doneButton.disabled = false;
-            let seconds = 5;
-            doneButtonTimeout.innerText = ` (${seconds})`;
-            const interval = window.setInterval(() => {
-              --seconds;
+              // Objects sent via message are raw objects, not typed.
+              // Need to get the name another way and override for Persistor.
+              enc.combatantTracker.getMainCombatantName = () => msg.data.name;
+              promises.push(persistor.persistEncounter(enc));
+            }
+            break;
+          case 'done':
+            Promise.all(promises).then(() => {
+              encounterTab.refresh();
+              doneButton.disabled = false;
+              let seconds = 5;
               doneButtonTimeout.innerText = ` (${seconds})`;
-              if (seconds === 0) {
-                window.clearInterval(interval);
-                hideModal('.importProgressModal');
-              }
-            }, 1000);
-          });
-          break;
+              const interval = window.setInterval(() => {
+                --seconds;
+                doneButtonTimeout.innerText = ` (${seconds})`;
+                if (seconds === 0) {
+                  window.clearInterval(interval);
+                  hideModal('.importProgressModal');
+                }
+              }, 1000);
+            });
+            break;
         }
       };
       file.arrayBuffer().then((b) => {
@@ -327,7 +327,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const $exportButton = document.querySelector('.exportDBButton');
 
   new Tooltip($exportButton, 'bottom',
-      'Export DB is very slow and shows a 0 byte download, but it does work eventually.');
+    'Export DB is very slow and shows a 0 byte download, but it does work eventually.');
 
   // Auto initialize all collapse elements on the page
   document.querySelectorAll('[data-toggle="collapse"]').forEach((n) => {

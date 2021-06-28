@@ -129,7 +129,7 @@ export default class EmulatedPartyInfo extends EventBus {
       this.triggerBars[i].classList.remove('dps');
       if (encounter.encounter.combatantTracker.combatants[id].job) {
         this.triggerBars[i].classList.add(
-            Util.jobToRole(encounter.encounter.combatantTracker.combatants[id].job),
+          Util.jobToRole(encounter.encounter.combatantTracker.combatants[id].job),
         );
       }
 
@@ -279,8 +279,8 @@ export default class EmulatedPartyInfo extends EventBus {
 
     $container.append(this._wrapCollapse({
       time: EmulatorCommon.timeToString(
-          encounter.encounter.duration - encounter.encounter.initialOffset,
-          false),
+        encounter.encounter.duration - encounter.encounter.initialOffset,
+        false),
       name: 'Final Data',
       classes: ['data'],
       $obj: $finalDataViewer,
@@ -312,16 +312,16 @@ export default class EmulatedPartyInfo extends EventBus {
     const type = trigger.status.responseType;
 
     switch (type) {
-    case 'info':
-      return 'info';
-    case 'alert':
-      return 'bell';
-    case 'alarm':
-      return 'exclamation';
-    case 'tts':
-      return 'bullhorn';
-    case 'audiofile':
-      return 'volume-up';
+      case 'info':
+        return 'info';
+      case 'alert':
+        return 'bell';
+      case 'alarm':
+        return 'exclamation';
+      case 'tts':
+        return 'bullhorn';
+      case 'audiofile':
+        return 'volume-up';
     }
 
     return undefined;
@@ -329,14 +329,14 @@ export default class EmulatedPartyInfo extends EventBus {
 
   getTriggerFiredLabelTime(Trigger) {
     return EmulatorCommon.timeToString(
-        Trigger.logLine.offset - this.emulator.currentEncounter.encounter.initialOffset,
-        false);
+      Trigger.logLine.offset - this.emulator.currentEncounter.encounter.initialOffset,
+      false);
   }
 
   getTriggerResolvedLabelTime(Trigger) {
     return EmulatorCommon.timeToString(
-        Trigger.resolvedOffset - this.emulator.currentEncounter.encounter.initialOffset,
-        false);
+      Trigger.resolvedOffset - this.emulator.currentEncounter.encounter.initialOffset,
+      false);
   }
 
   /**

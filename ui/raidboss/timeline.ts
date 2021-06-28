@@ -190,7 +190,7 @@ export class Timeline {
   private updateTimer = 0;
 
   constructor(text: string, replacements: TimelineReplacement[], triggers: LooseTimelineTrigger[],
-      styles: TimelineStyle[], options: RaidbossOptions) {
+    styles: TimelineStyle[], options: RaidbossOptions) {
     this.options = options || {};
     this.perTriggerAutoConfig = this.options['PerTriggerAutoConfig'] || {};
     this.replacements = replacements;
@@ -788,14 +788,14 @@ export class Timeline {
     }
 
     const nextTime = Math.min(nextEventStarting, nextEventEnding, nextTextOccurs,
-        nextSyncStarting, nextSyncEnding);
+      nextSyncStarting, nextSyncEnding);
     if (nextTime !== kBig) {
       console.assert(nextTime > fightNow, 'nextTime is in the past');
       this.updateTimer = window.setTimeout(
-          () => {
-            this._OnUpdateTimer(Date.now());
-          },
-          (nextTime - fightNow) * 1000);
+        () => {
+          this._OnUpdateTimer(Date.now());
+        },
+        (nextTime - fightNow) * 1000);
     }
   }
 
@@ -979,8 +979,8 @@ export class TimelineUI {
     if (!channeling && e.time - fightNow > this.options.BarExpiresSoonSeconds) {
       bar.fg = this.barColor;
       window.setTimeout(
-          this.OnTimerExpiresSoon.bind(this, e.id),
-          (e.time - fightNow - this.options.BarExpiresSoonSeconds) * 1000);
+        this.OnTimerExpiresSoon.bind(this, e.id),
+        (e.time - fightNow - this.options.BarExpiresSoonSeconds) * 1000);
     } else {
       bar.fg = this.barExpiresSoonColor;
     }
@@ -1012,8 +1012,8 @@ export class TimelineUI {
   protected OnRemoveTimer(e: Event, expired: boolean, force = false): void {
     if (!force && expired && this.options.KeepExpiredTimerBarsForSeconds) {
       this.expireTimers[e.id] = window.setTimeout(
-          this.OnRemoveTimer.bind(this, e, false),
-          this.options.KeepExpiredTimerBarsForSeconds * 1000);
+        this.OnRemoveTimer.bind(this, e, false),
+        this.options.KeepExpiredTimerBarsForSeconds * 1000);
       return;
     } else if (e.id in this.expireTimers) {
       window.clearTimeout(this.expireTimers[e.id]);
@@ -1065,9 +1065,9 @@ export class TimelineUI {
   }
 
   private OnTrigger(
-      trigger: LooseTimelineTrigger,
-      matches: RegExpExecArray | null,
-      currentTime: number): void {
+    trigger: LooseTimelineTrigger,
+    matches: RegExpExecArray | null,
+    currentTime: number): void {
     if (this.popupText)
       this.popupText.Trigger(trigger, matches, currentTime);
   }
@@ -1110,7 +1110,7 @@ export class TimelineController {
   protected activeTimeline: Timeline | null = null;
 
   constructor(protected options: RaidbossOptions, protected ui: TimelineUI,
-      raidbossDataFiles: { [filename: string]: string }) {
+    raidbossDataFiles: { [filename: string]: string }) {
     this.options = options;
     this.ui = ui;
 
@@ -1165,8 +1165,8 @@ export class TimelineController {
   }
 
   public SetActiveTimeline(timelineFiles: string[], timelines: string[],
-      replacements: TimelineReplacement[], triggers: LooseTimelineTrigger[],
-      styles: TimelineStyle[]): void {
+    replacements: TimelineReplacement[], triggers: LooseTimelineTrigger[],
+    styles: TimelineStyle[]): void {
     this.activeTimeline = null;
 
     let text = '';
@@ -1199,14 +1199,14 @@ export class TimelineLoader {
   }
 
   public SetTimelines(timelineFiles: string[], timelines: string[],
-      replacements: TimelineReplacement[], triggers: LooseTimelineTrigger[],
-      styles: TimelineStyle[]): void {
+    replacements: TimelineReplacement[], triggers: LooseTimelineTrigger[],
+    styles: TimelineStyle[]): void {
     this.timelineController.SetActiveTimeline(
-        timelineFiles,
-        timelines,
-        replacements,
-        triggers,
-        styles,
+      timelineFiles,
+      timelines,
+      replacements,
+      triggers,
+      styles,
     );
   }
 

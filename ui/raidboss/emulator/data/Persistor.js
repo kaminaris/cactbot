@@ -23,18 +23,18 @@ export default class Persistor extends EventBus {
         // We deliberately avoid using breaks for this switch/case to allow
         // incremental upgrades to apply in sequence
         switch (ev.oldVersion) {
-        case 0:
-          encountersStorage = ev.target.result.createObjectStore('Encounters', {
-            keyPath: 'id',
-            autoIncrement: true,
-          });
-          encounterSummariesStorage = ev.target.result.createObjectStore('EncounterSummaries', {
-            keyPath: 'id',
-            autoIncrement: true,
-          });
-          encounterSummariesStorage.createIndex('zoneName', 'zoneName');
-          encounterSummariesStorage.createIndex('start', 'start');
-          encounterSummariesStorage.createIndex('zoneName_start', ['zoneName', 'start']);
+          case 0:
+            encountersStorage = ev.target.result.createObjectStore('Encounters', {
+              keyPath: 'id',
+              autoIncrement: true,
+            });
+            encounterSummariesStorage = ev.target.result.createObjectStore('EncounterSummaries', {
+              keyPath: 'id',
+              autoIncrement: true,
+            });
+            encounterSummariesStorage.createIndex('zoneName', 'zoneName');
+            encounterSummariesStorage.createIndex('start', 'start');
+            encounterSummariesStorage.createIndex('zoneName_start', ['zoneName', 'start']);
         }
         promises.push(new Promise((res) => {
           encountersStorage.transaction.addEventListener('complete', (tev) => {
@@ -97,9 +97,9 @@ export default class Persistor extends EventBus {
         req.addEventListener('success', (ev) => {
           const enc = req.result;
           const ret = new Encounter(enc.encounterDay,
-              enc.encounterZoneId,
-              enc.encounterZoneName,
-              enc.logLines);
+            enc.encounterZoneId,
+            enc.encounterZoneName,
+            enc.logLines);
           ret.id = enc.id;
           // Check for encounter upgrade, re-save encounter if it's upgraded.
           if (ret.upgrade(enc.version)) {
@@ -152,7 +152,7 @@ export default class Persistor extends EventBus {
             index = encounterSummariesStorage.index('zoneName_start');
             if (endTimestamp !== null) {
               keyRange = IDBKeyRange.bound([zoneName, startTimestamp], [zoneName, endTimestamp],
-                  [true, true], [true, true]);
+                [true, true], [true, true]);
             } else {
               keyRange = IDBKeyRange.lowerBound([zoneName, startTimestamp], [true, true]);
             }
@@ -221,9 +221,9 @@ export default class Persistor extends EventBus {
   async importDB(DB) {
     DB.encounters.forEach((enc) => {
       this.persistEncounter(new Encounter(enc.encounterDay,
-          enc.encounterZoneId,
-          enc.encounterZoneName,
-          enc.encounterLines));
+        enc.encounterZoneId,
+        enc.encounterZoneName,
+        enc.encounterLines));
     });
   }
 
