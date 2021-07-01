@@ -40,7 +40,6 @@ const settings = {
     'plugin/',
     'publish/',
     'resources/lib/',
-    'ui/raidboss/emulator/data/CombatantJobSearch.ts',
   ],
   'parserOptions': {
     'ecmaVersion': 2020,
